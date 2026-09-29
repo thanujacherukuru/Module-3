@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Management System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #5a3d8a;
+        }
+
+        .form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        input, select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            grid-column: span 2;
+            padding: 12px;
+            background: #5a3d8a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3f276b;
+        }
+
+        .event {
+            background: #f3efff;
+            margin-top: 20px;
+            padding: 20px;
+            border-left: 6px solid #5a3d8a;
+            border-radius: 8px;
+        }
+
+        .event h3 {
+            color: #5a3d8a;
+        }
+
+        .delete {
+            background: #e74c3c;
+            padding: 8px 15px;
+            margin-top: 10px;
+        }
+
+        .delete:hover {
+            background: #c0392b;
+        }
+
+        .total {
+            margin-top: 25px;
+            padding: 15px;
+            background: #e8f8f5;
+            color: #117a65;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Event Management System</h1>
+
+    <div class="form">
+
+        <input type="text" id="eventName" placeholder="Event Name">
+
+        <input type="date" id="eventDate">
+
+        <input type="text" id="venue" placeholder="Venue">
+
+        <input type="number" id="guests" placeholder="Number of Guests">
+
+        <select id="eventType">
+            <option value="">Select Event Type</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Conference">Conference</option>
+            <option value="College Event">College Event</option>
+            <option value="Party">Party</option>
+        </select>
+
+        <input type="number" id="budget" placeholder="Budget">
+
+        <button onclick="addEvent()">Add Event</button>
+
+    </div>
+
+    <div id="eventList"></div>
+
+    <div class="total">
+        Total Budget: ₹<span id="totalBudget">0</span>
+    </div>
+
+</div>
+
+<script>
+
+    let totalBudget = 0;
+
+    function addEvent() {
+
+        let name = document.getElementById("eventName").value;
+        let date = document.getElementById("eventDate").value;
+        let venue = document.getElementById("venue").value;
+        let guests = document.getElementById("guests").value;
+        let type = document.getElementById("eventType").value;
+        let budget = Number(document.getElementById("budget").value);
+
+        if (name === "" || date === "" || venue === "" ||
+            guests === "" || type === "" || budget === 0) {
+
+            alert("Please fill all the details!");
+            return;
+        }
+
+        let event = document.createElement("div");
+
+        event.className = "event";
+
+        event.innerHTML = `
+            <h3>${name}</h3>
+
+            <p><b>Event Type:</b> ${type}</p>
+
+            <p><b>Date:</b> ${date}</p>
+
+            <p><b>Venue:</b> ${venue}</p>
+
+            <p><b>Guests:</b> ${guests}</p>
+
+            <p><b>Budget:</b> ₹${budget}</p>
+
+            <button class="delete" onclick="deleteEvent(this, ${budget})">
+                Delete Event
+            </button>
+        `;
+
+        document.getElementById("eventList").appendChild(event);
+
+        totalBudget = totalBudget + budget;
+
+        document.getElementById("totalBudget").innerText = totalBudget;
+
+        document.getElementById("eventName").value = "";
+        document.getElementById("eventDate").value = "";
+        document.getElementById("venue").value = "";
+        document.getElementById("guests").value = "";
+        document.getElementById("eventType").value = "";
+        document.getElementById("budget").value = "";
+    }
+
+
+    function deleteEvent(button, budget) {
+
+        button.parentElement.remove();
+
+        totalBudget = totalBudget - budget;
+
+        document.getElementById("totalBudget").innerText = totalBudget;
+    }
+
+</script>
+
+</body>
+</html>
+```

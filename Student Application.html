@@ -1,0 +1,108 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Student Application</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background-color: lightblue;
+            text-align: center;
+        }
+
+        form {
+            background-color: white;
+            width: 350px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 8px;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+        }
+
+        #result {
+            color: green;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Student Application Form</h1>
+
+    <form onsubmit="submitForm(event)">
+
+        <input type="text" id="name"
+               placeholder="Enter Name" required>
+
+        <input type="number" id="age"
+               placeholder="Enter Age" required>
+
+        <input type="email" id="email"
+               placeholder="Enter Email" required>
+
+        <input type="text" id="phone"
+               placeholder="Enter Phone Number" required>
+
+        <select id="course" required>
+
+            <option value="">Select Course</option>
+
+            <option>B.Tech</option>
+
+            <option>BCA</option>
+
+            <option>B.Sc</option>
+
+            <option>MCA</option>
+
+        </select>
+
+        <br>
+
+        <button type="submit">
+            Submit
+        </button>
+
+    </form>
+
+    <p id="result"></p>
+
+
+    <script>
+
+        function submitForm(event) {
+
+            event.preventDefault();
+
+            var name = document.getElementById("name").value;
+
+            var course = document.getElementById("course").value;
+
+            document.getElementById("result").innerHTML =
+                "Application submitted successfully!<br>" +
+                "Student Name: " + name +
+                "<br>Course: " + course;
+        }
+
+    </script>
+
+</body>
+</html>
+```
